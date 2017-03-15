@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<requisicao-transacao id="%(xml_transaction_id)s" versao="1.2.1">
+<requisicao-transacao id="%(xml_transaction_id)s" versao="%(version)s">
     <dados-ec>
         <numero>%(affiliation_id)s</numero>
         <chave>%(api_key)s</chave>

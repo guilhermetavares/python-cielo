@@ -3,6 +3,7 @@ from decimal import Decimal
 from cielo import *
 
 
+CIELO_SANDBOX = True
 CIELO_API_KEY = '25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3'
 CIELO_AFFILIATION_ID = '1006993069'
 
@@ -23,7 +24,7 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'use_ssl': True,
         }
 
@@ -44,7 +45,7 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': False,
+            'sandbox': CIELO_SANDBOX,
             'use_ssl': None,
         }
 
@@ -65,7 +66,7 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
 
         attempt = PaymentAttempt(**params)
@@ -81,7 +82,7 @@ class MainTest(unittest.TestCase):
             'exp_month': 1,
             'exp_year': 2010,
             'card_holders_name': 'JOAO DA SILVA',
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
         token = CieloToken(**params)
         token.create_token()
@@ -97,7 +98,7 @@ class MainTest(unittest.TestCase):
             'exp_month': 1,
             'exp_year': 2010,
             'card_holders_name': 'JOAO DA SILVA',
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
         token = CieloToken(**params)
         self.assertRaises(TokenException, token.create_token)
@@ -111,7 +112,7 @@ class MainTest(unittest.TestCase):
             'exp_month': 1,
             'exp_year': 2010,
             'card_holders_name': 'JOAO DA SILVA',
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
         token = CieloToken(**params)
         token.create_token()
@@ -156,7 +157,7 @@ class MainTest(unittest.TestCase):
         self.assertTrue(attempt.capture())
 
         cancel_params = {
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'transaction_id': attempt.transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
@@ -165,7 +166,7 @@ class MainTest(unittest.TestCase):
         self.assertRaises(AssertionError, CancelTransaction, **cancel_params)
 
         cancel_params = {
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'transaction_id': attempt.transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
@@ -189,7 +190,7 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
 
         attempt = PaymentAttempt(**params)
@@ -197,7 +198,7 @@ class MainTest(unittest.TestCase):
         self.assertTrue(attempt.capture())
 
         cancel_params = {
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'transaction_id': attempt.transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
@@ -206,7 +207,7 @@ class MainTest(unittest.TestCase):
         self.assertRaises(AssertionError, CancelTransaction, **cancel_params)
 
         cancel_params = {
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'transaction_id': attempt.transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
@@ -230,15 +231,17 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
         }
 
         attempt = PaymentAttempt(**params)
         self.assertTrue(attempt.get_authorized())
 
+        transaction_id = attempt.transaction_id
+
         consult_params = {
-            'sandbox': True,
-            'transaction_id': attempt.transaction_id,
+            'sandbox': CIELO_SANDBOX,
+            'transaction_id': transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
         }
@@ -250,7 +253,7 @@ class MainTest(unittest.TestCase):
         transaction_id = '1006993069114925A001'
 
         params = {
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'transaction_id': transaction_id,
             'affiliation_id': CIELO_AFFILIATION_ID,
             'api_key': CIELO_API_KEY,
@@ -271,7 +274,7 @@ class MainTest(unittest.TestCase):
             'exp_month': 1,
             'exp_year': 2010,
             'card_holders_name': 'JOAO DA SILVA',
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'url_redirect': 'http://localhost:8000/'
         }
         debt = DebtAttempt(**params)
@@ -291,7 +294,7 @@ class MainTest(unittest.TestCase):
             'card_holders_name': 'JOAO DA SILVA',
             'installments': 1,
             'transaction': CASH,
-            'sandbox': True,
+            'sandbox': CIELO_SANDBOX,
             'use_ssl': True,
             'gerar_token': True,
         }

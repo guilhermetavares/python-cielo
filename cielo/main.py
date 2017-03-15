@@ -189,8 +189,7 @@ class BaseCieloObject(object):
 
     def assert_transaction_is_paid(self):
         self.consult()
-        self.status = int(
-            self.dom.getElementsByTagName('status')[0].childNodes[0].data)
+        self.status = int(self.dom.getElementsByTagName('status')[0].childNodes[0].data)
         if self.status in [2, 4, 6]:
             if self.status != 6:
                 self.capture()
@@ -358,12 +357,15 @@ class ConsultTransaction(BaseCieloObject):
             transaction_id,
             sandbox=False,
             use_ssl=None,
+            transaction_type='tid',
         ):
         super(ConsultTransaction, self).__init__(sandbox=sandbox, use_ssl=use_ssl)
         self.url = SANDBOX_URL if sandbox else PRODUCTION_URL
         self.affiliation_id = affiliation_id
         self.api_key = api_key
         self.transaction_id = transaction_id
+        if transaction_type == 'order':
+            self.template = 'templates/consult_from_number.xml'
 
 
 class CancelTransaction(BaseCieloObject):
@@ -506,6 +508,7 @@ class UpdatePaymentAttempt(BaseCieloObject):
             sandbox=False,
             use_ssl=None,
             gerar_token=False,
+            version='1.2.1',
         ):
 
         super(UpdatePaymentAttempt, self).__init__(sandbox=sandbox, use_ssl=use_ssl)
@@ -535,6 +538,7 @@ class UpdatePaymentAttempt(BaseCieloObject):
         self.sandbox = sandbox
         self.gerar_token = 'true' if gerar_token else 'false'
         self.xml_transaction_id = self.get_xml_transaction_id()
+        self.version = version
 
 
 class DebtAttempt(BaseCieloObject):

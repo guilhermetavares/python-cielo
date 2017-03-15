@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<requisicao-consulta-chsec id="a51489b1-93d5-437f-bb4f-5b932fade248" versao="1.2.1">
+    <numero-pedido>%(transaction_id)s</numero-pedido>
+    <dados-ec>
+        <numero>%(affiliation_id)s</numero>
+        <chave>%(api_key)s</chave>
+    </dados-ec>
+</requisicao-consulta-chsec>
