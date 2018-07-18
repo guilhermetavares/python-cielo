@@ -70,11 +70,10 @@ CIELO_MSG_ERRORS = {
     '099': u'Falha no sistema.(099-Erro inesperado)',
 }
 
-# try:
-#     SSL_VERSION = ssl.PROTOCOL_SSLv23
-# except:
-#     SSL_VERSION = ssl.PROTOCOL_TLSv1
-SSL_VERSION = ssl.PROTOCOL_TLSv1
+try:
+    SSL_VERSION = ssl.PROTOCOL_TLSv1_2
+except:
+    SSL_VERSION = ssl.PROTOCOL_TLSv1
 
 
 class CieloHTTPSAdapter(HTTPAdapter):
